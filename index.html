@@ -34,23 +34,31 @@
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
-     // Abre o App de Exercícios à direita (3/4 da largura da tela)
+ 	// Proporções para as janelas
+  	const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
+  	const rightWidth = screenWidth - leftWidth; // 34% restante
+
+  	const height = screenHeight; // Altura total disponível
+
+     // Abre o App de Exercícios à esquerda (66% da largura da tela)
       window.open(
-        'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
+        'https://eliezerrosa.github.io/app-exercicios/',
         'AppExercicios',
-        `width=${(3 / 4) * screenWidth},height=${screenHeight},left=${screenWidth / 4},top=0`
+        'leftWindow', `width=${leftWidth},height=${height},left=0,top=0`
       );
 
     // Abre o ChatGPT à esquerda (1/4 da largura da tela)
       window.open(
         'https://chat.openai.com/',
         'ChatGPT',
-        `width=${screenWidth / 4},height=${screenHeight},left=0,top=0`
+        'rightWindow', `width=${rightWidth},height=${height},left=${leftWidth},top=0`
       );
   }
 
-  // Adiciona um atraso para chamar a função
-  setTimeout(openApps, 2000);
+  // Adiciona um atraso para chamar a função e finaliza
+  	setTimeout(() => {
+        	window.close();
+      	}, 1000);
 </script>
 
 </body>
