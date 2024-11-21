@@ -34,19 +34,19 @@
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
-    // Abre o App de Exercícios à esquerda
-    window.open(
-      'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
-      'AppExercicios',
-      `width=${(3 / 4) * screenWidth},height=${screenHeight},left=0,top=0`
-    );
+     // Abre o App de Exercícios à direita (3/4 da largura da tela)
+      window.open(
+        'https://eliezerrosa.github.io/app-exercicios/',
+        'AppExercicios',
+        `width=${(3 / 4) * screenWidth},height=${screenHeight},left=${screenWidth / 4},top=0`
+      );
 
-    // Abre o ChatGPT à direita
-    window.open(
-      'https://chat.openai.com/',
-      'ChatGPT',
-      `width=${screenWidth / 4},height=${screenHeight},left=${(3 / 4) * screenWidth},top=0`
-    );
+    // Abre o ChatGPT à esquerda (1/4 da largura da tela)
+      window.open(
+        'https://chat.openai.com/',
+        'ChatGPT',
+        `width=${screenWidth / 4},height=${screenHeight},left=0,top=0`
+      );
   }
 
   // Adiciona um atraso para chamar a função
