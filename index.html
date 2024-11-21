@@ -3,34 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Gerenciador</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    h1 {
-      font-size: 24px;
-      color: #333;
-    }
-    p {
-      font-size: 16px;
-      color: #555;
-    }
-  </style>
-</head>
-<body onload="openAndClose()">
-  <h1>App Gerenciador</h1>
-  <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
-  
- <script>
-  function openAndClose() {
+  <title>Gerenciador de App e ChatGPT</title>
+  <script>
+    function openAndClose() {
       // Resolução da tela
       const screenWidth = window.screen.availWidth; // Largura disponível
       const screenHeight = window.screen.availHeight; // Altura disponível
@@ -51,7 +26,10 @@
         window.close();
       }, 1000);
     }
-</script>
-
+  </script>
+</head>
+<body onload="openAndClose()">
+  <h1>Gerenciando Janelas...</h1>
+  <p>Carregando o app e o ChatGPT...</p>
 </body>
 </html>
