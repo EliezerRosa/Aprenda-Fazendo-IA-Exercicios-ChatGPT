@@ -25,18 +25,19 @@
     }
   </style>
 </head>
-<body onload="openApps()">
+<body>
   <h1>App Gerenciador</h1>
   <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
 
   <script>
+    // Função que abre as janelas automaticamente
     function openApps() {
       const screenWidth = window.screen.width;
       const screenHeight = window.screen.height;
 
       // Abre o App de Exercícios à esquerda
       window.open(
-        'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
+        'https://seu-usuario.github.io/app-exercicios/',
         'AppExercicios',
         `width=${(3 / 4) * screenWidth},height=${screenHeight},left=0,top=0`
       );
@@ -48,6 +49,9 @@
         `width=${screenWidth / 4},height=${screenHeight},left=${(3 / 4) * screenWidth},top=0`
       );
     }
+
+    // Chama a função automaticamente ao carregar a página
+    window.onload = openApps;
   </script>
 </body>
 </html>
