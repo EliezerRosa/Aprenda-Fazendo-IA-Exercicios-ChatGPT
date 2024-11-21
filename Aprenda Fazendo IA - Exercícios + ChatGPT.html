@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Gerenciador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    button {
+      padding: 15px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>App Gerenciador</h1>
+  <button onclick="openApps()">Abrir Apps</button>
+
+  <script>
+    function openApps() {
+      const screenWidth = window.screen.width;
+      const screenHeight = window.screen.height;
+
+      // Abre o app de exercícios à esquerda
+      window.open(
+        'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
+        'AppExercicios',
+        `width=${(3 / 4) * screenWidth},height=${screenHeight},left=0,top=0`
+      );
+
+      // Abre o ChatGPT à direita
+      window.open(
+        'https://chat.openai.com/',
+        'ChatGPT',
+        `width=${screenWidth / 4},height=${screenHeight},left=${(3 / 4) * screenWidth},top=0`
+      );
+    }
+  </script>
+</body>
+</html>
