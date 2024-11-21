@@ -28,37 +28,29 @@
 <body>
   <h1>App Gerenciador</h1>
   <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
-
+  onload="openAndClose()";
  <script>
-  function openApps() {
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
+  function openAndClose() {
+      // Resolução da tela
+      const screenWidth = window.screen.availWidth; // Largura disponível
+      const screenHeight = window.screen.availHeight; // Altura disponível
 
- 	// Proporções para as janelas
-  	const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
-  	const rightWidth = screenWidth - leftWidth; // 34% restante
+      // Proporções para as janelas
+      const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
+      const rightWidth = screenWidth - leftWidth; // 34% restante
+      const height = screenHeight; // Altura total disponível
 
-  	const height = screenHeight; // Altura total disponível
+      // Abrir a janela maior (esquerda)
+      window.open('https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/', 'leftWindow', `width=${leftWidth},height=${height},left=0,top=0`);
 
-     // Abre o App de Exercícios à esquerda (66% da largura da tela)
-      window.open(
-        'https://eliezerrosa.github.io/app-exercicios/',
-        'AppExercicios',
-        'leftWindow', `width=${leftWidth},height=${height},left=0,top=0`
-      );
+      // Abrir a janela menor (direita)
+      window.open('https://chat.openai.com', 'rightWindow', `width=${rightWidth},height=${height},left=${leftWidth},top=0`);
 
-    // Abre o ChatGPT à esquerda (1/4 da largura da tela)
-      window.open(
-        'https://chat.openai.com/',
-        'ChatGPT',
-        'rightWindow', `width=${rightWidth},height=${height},left=${leftWidth},top=0`
-      );
-  }
-
-  // Adiciona um atraso para chamar a função e finaliza
-  	setTimeout(() => {
-        	window.close();
-      	}, 1000);
+      // Fechar a página gerenciadora após 1 segundo (1000 ms)
+      setTimeout(() => {
+        window.close();
+      }, 1000);
+    }
 </script>
 
 </body>
