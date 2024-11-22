@@ -31,14 +31,14 @@
   
  <script>
 
-function openWindows() {
+function openAndClose() {
   // Pegue a largura e altura da tela disponível
   const screenWidth = window.screen.availWidth; // Largura disponível
   const screenHeight = window.screen.availHeight; // Altura disponível
 
   // Proporções para as janelas
-  const leftWidth = Math.round(screenWidth * 0.65); // 65% da largura
-  const rightWidth = screenWidth - leftWidth; // 35% restante
+  const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
+  const rightWidth = screenWidth - leftWidth; // 34% restante
 
   // Margens de ajuste (deslocamento mínimo)
   const offset = 5;
@@ -56,6 +56,11 @@ function openWindows() {
     'rightWindow',
     `width=${rightWidth},height=${screenHeight},left=${leftWidth - offset},top=0`
   );
+// Fechar a página gerenciadora após 1 segundo (1000 ms)
+      setTimeout(() => {
+        window.close();
+      }, 1000);
+
 }
 
 </script>
