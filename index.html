@@ -3,33 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerenciador de App e ChatGPT</title>
-  <script>
-    function openAndClose() {
-      // Resolução da tela
-      const screenWidth = window.screen.availWidth; // Largura disponível
-      const screenHeight = window.screen.availHeight; // Altura disponível
-
-      // Proporções para as janelas
-      const leftWidth = Math.round(screenWidth * 0.65); // 65% da largura
-      const rightWidth = screenWidth - leftWidth; // 35% restante
-      const height = screenHeight; // Altura total disponível
-
-      // Abrir a janela maior (esquerda)
-      window.open('https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/', 'leftWindow', `width=${leftWidth},height=${height},left=0,top=0`);
-
-      // Abrir a janela menor (direita)
-      window.open('https://chat.openai.com', 'rightWindow', `width=${rightWidth},height=${height},left=${leftWidth},top=0`);
-
-      // Fechar a página gerenciadora após 1 segundo (1000 ms)
-      setTimeout(() => {
-        window.close();
-      }, 1000);
+  <title>App Gerenciador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-  </script>
+    h1 {
+      font-size: 24px;
+      color: #333;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
 </head>
 <body onload="openAndClose()">
-  <h1>Gerenciando Janelas...</h1>
-  <p>Carregando o app e o ChatGPT...</p>
+  <h1>App Gerenciador</h1>
+  <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
+  
+ <script>
+
+function openWindows() {
+  // Pegue a largura e altura da tela disponível
+  const screenWidth = window.screen.availWidth; // Largura disponível
+  const screenHeight = window.screen.availHeight; // Altura disponível
+
+  // Proporções para as janelas
+  const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
+  const rightWidth = screenWidth - leftWidth; // 34% restante
+
+  // Margens de ajuste (deslocamento mínimo)
+  const offset = 5;
+
+  // Abra a janela maior (à esquerda, ligeiramente deslocada para fora da tela)
+  window.open(
+    'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
+    'leftWindow',
+    `width=${leftWidth},height=${screenHeight},left=-${offset},top=0`
+  );
+
+  // Abra a janela menor (à direita, ligeiramente deslocada para fora da tela)
+  window.open(
+    'https://chat.openai.com',
+    'rightWindow',
+    `width=${rightWidth},height=${screenHeight},left=${leftWidth - offset},top=0`
+  );
+}
+
+</script>
+
 </body>
 </html>
