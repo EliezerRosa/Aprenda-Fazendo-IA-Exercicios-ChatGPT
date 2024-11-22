@@ -37,8 +37,8 @@ function openAndClose() {
   const screenHeight = window.screen.availHeight; // Altura total disponível
 
   // Proporções fixas para as janelas
- const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
-  const rightWidth = (screenWidth * 0.30); // 30% restante da largura
+ const leftWidth = Math.round(screenWidth * 0.65); // 65% da largura
+  const rightWidth = (screenWidth * 0.34); // 30% restante da largura
 
   // Abrir janela maior (à esquerda)
   window.open(
@@ -51,7 +51,7 @@ function openAndClose() {
   window.open(
     'https://chat.openai.com',
     'rightWindow',
-    `width=${rightWidth},height=${screenHeight},left=${leftWidth},top=0`
+    `width=${rightWidth},height=${screenHeight},left=${leftWidth + 1},top=0`
   );
 // Fechar a página gerenciadora após 1 segundo (1000 ms)
       setTimeout(() => {
