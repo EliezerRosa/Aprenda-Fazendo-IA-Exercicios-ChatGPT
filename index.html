@@ -32,29 +32,29 @@
  <script>
 
 function openAndClose() {
-  // Pegue a largura e altura da tela disponível
-  const screenWidth = window.screen.availWidth; // Largura disponível
-  const screenHeight = window.screen.availHeight; // Altura disponível
+ // Pegue a largura e altura da tela disponível
+  const screenWidth = window.screen.availWidth; // Largura total disponível
+  const screenHeight = window.screen.availHeight; // Altura total disponível
 
-  // Proporções para as janelas
+  // Proporções fixas para as janelas
   const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
-  const rightWidth = screenWidth - leftWidth; // 34% restante
+  const rightWidth = screenWidth - leftWidth; // O restante exato da largura
 
-  // Margens de ajuste (deslocamento mínimo)
-  const offset = 100;
+  // Ajuste adicional para compensar bordas ou arredondamento
+  const adjustment = 1; // Somar 1 pixel para evitar lacunas
 
-  // Abra a janela maior (à esquerda, ligeiramente deslocada para fora da tela)
+  // Abrir janela maior (à esquerda)
   window.open(
-    'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
+    'https://seu-app-url.com',
     'leftWindow',
-    `width=${leftWidth},height=${screenHeight},left=-${offset},top=0`
+    `width=${leftWidth + adjustment},height=${screenHeight},left=0,top=0`
   );
 
-  // Abra a janela menor (à direita, ligeiramente deslocada para fora da tela)
+  // Abrir janela menor (à direita)
   window.open(
-    'https://chat.openai.com',
+    'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
     'rightWindow',
-    `width=${rightWidth},height=${screenHeight},left=${leftWidth - offset},top=0`
+    `width=${rightWidth + adjustment},height=${screenHeight},left=${leftWidth},top=0`
   );
 // Fechar a página gerenciadora após 1 segundo (1000 ms)
       setTimeout(() => {
