@@ -38,7 +38,7 @@ function openAndClose() {
 
   // Proporções fixas para as janelas
   const leftWidth = Math.round(screenWidth * 0.66); // 66% da largura
-  const rightWidth = (screenWidth - leftWidth) + 5; // +5 restante exato da largura
+  const rightWidth = (screenWidth - leftWidth) - 1; // +5 restante exato da largura
 
   // Ajuste adicional para compensar bordas ou arredondamento
   const adjustment = 1; // Somar 1 pixel para evitar lacunas
@@ -47,14 +47,14 @@ function openAndClose() {
   window.open(
     'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
     'leftWindow',
-    `width=${leftWidth + adjustment},height=${screenHeight},left=0,top=0`
+    `width=${leftWidth},height=${screenHeight},left=0,top=0`
   );
 
   // Abrir janela menor (à direita)
   window.open(
     'https://chat.openai.com',
     'rightWindow',
-    `width=${rightWidth + adjustment},height=${screenHeight},left=${leftWidth},top=0`
+    `width=${rightWidth},height=${screenHeight},left=${leftWidth},top=0`
   );
 // Fechar a página gerenciadora após 1 segundo (1000 ms)
       setTimeout(() => {
