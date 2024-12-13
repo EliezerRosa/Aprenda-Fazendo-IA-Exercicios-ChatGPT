@@ -29,7 +29,7 @@
   <h1>App Gerenciador</h1>
   <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
   
- <script>
+<script>
 function openAndClose() {
   const screenWidth = window.screen.availWidth; 
   const screenHeight = window.screen.availHeight;
@@ -45,19 +45,20 @@ function openAndClose() {
     `width=${leftWidth},height=${screenHeight},left=0,top=0`
   );
 
-  // Abrir janela menor (à direita)
+  // Ajustar posição da segunda janela
   setTimeout(() => {
+    const rightPosition = leftWidth; // Exato onde a primeira janela termina
     window.open(
       'https://chat.openai.com',
       'rightWindow',
-      `width=${rightWidth},height=${screenHeight},left=${leftWidth + 3},top=0`
+      `width=${rightWidth},height=${screenHeight},left=${rightPosition},top=0`
     );
-  }, 500); // Atraso de 500ms para garantir sincronização
+  }, 500);
 
   // Fechar página gerenciadora após 2 segundos
   setTimeout(() => {
     window.close();
-  }, 3000);
+  }, 2000);
 }
 </script>
 
