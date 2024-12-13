@@ -30,15 +30,13 @@
   <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
   
  <script>
-
 function openAndClose() {
- // Pegue a largura e altura da tela disponível
-  const screenWidth = window.screen.availWidth; // Largura total disponível
-  const screenHeight = window.screen.availHeight; // Altura total disponível
+  const screenWidth = window.screen.availWidth; 
+  const screenHeight = window.screen.availHeight;
 
-  // Proporções fixas para as janelas
- const leftWidth = Math.round(screenWidth * 0.65); // 65% da largura
-  const rightWidth = (screenWidth * 0.34); // 30% restante da largura
+  // Definir larguras das janelas
+  const leftWidth = Math.round(screenWidth * 0.65); 
+  const rightWidth = Math.round(screenWidth * 0.35);
 
   // Abrir janela maior (à esquerda)
   window.open(
@@ -48,19 +46,21 @@ function openAndClose() {
   );
 
   // Abrir janela menor (à direita)
-  window.open(
-    'https://chat.openai.com',
-    'rightWindow',
-    `width=${rightWidth},height=${screenHeight},left=${leftWidth + 3},top=-1`
-  );
-// Fechar a página gerenciadora após 1 segundo (1000 ms)
-      setTimeout(() => {
-        window.close();
-      }, 1000);
+  setTimeout(() => {
+    window.open(
+      'https://chat.openai.com',
+      'rightWindow',
+      `width=${rightWidth},height=${screenHeight},left=${leftWidth + 3},top=0`
+    );
+  }, 500); // Atraso de 500ms para garantir sincronização
 
+  // Fechar página gerenciadora após 2 segundos
+  setTimeout(() => {
+    window.close();
+  }, 3000);
 }
-
 </script>
+
 
 </body>
 </html>
