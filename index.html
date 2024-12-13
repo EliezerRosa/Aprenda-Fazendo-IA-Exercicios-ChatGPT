@@ -31,12 +31,12 @@
   
 <script>
 function openAndClose() {
-  const screenWidth = window.screen.availWidth; 
-  const screenHeight = window.screen.availHeight;
+  const screenWidth = window.screen.width; // Largura total da tela
+  const screenHeight = window.screen.height; // Altura total da tela
 
-  // Definir larguras das janelas
-  const leftWidth = Math.round(screenWidth * 0.65); 
-  const rightWidth = Math.round(screenWidth * 0.35);
+  // Calcular larguras exatas para evitar sobreposição e margens
+  const leftWidth = Math.floor(screenWidth * 0.65); 
+  const rightWidth = screenWidth - leftWidth; // Resto da tela para a janela menor
 
   // Abrir janela maior (à esquerda)
   window.open(
@@ -45,15 +45,14 @@ function openAndClose() {
     `width=${leftWidth},height=${screenHeight},left=0,top=0`
   );
 
-  // Ajustar posição da segunda janela
+  // Abrir janela menor (à direita) alinhada perfeitamente
   setTimeout(() => {
-    const rightPosition = leftWidth; // Exato onde a primeira janela termina
     window.open(
       'https://chat.openai.com',
       'rightWindow',
-      `width=${rightWidth},height=${screenHeight},left=${rightPosition},top=0`
+      `width=${rightWidth},height=${screenHeight},left=${leftWidth},top=0`
     );
-  }, 500);
+  }, 500); // Atraso para evitar conflitos no redimensionamento
 
   // Fechar página gerenciadora após 2 segundos
   setTimeout(() => {
