@@ -34,22 +34,20 @@ function openAndClose() {
   const screenWidth = window.screen.width; // Largura total da tela
   const screenHeight = window.screen.height; // Altura total da tela
 
-  // Ajuste preciso das larguras
-  const leftWidth = Math.round(screenWidth * 0.65); // Janela maior
-  const rightWidth = screenWidth - leftWidth; // Janela menor, ocupando o resto
+  // Proporções rígidas e ajustadas
+  const leftWidth = Math.floor(screenWidth * 0.65); // Janela maior: 65% da largura
+  const rightWidth = screenWidth - leftWidth - 1; // Janela menor: Resto ajustado para exato 100%
 
-  // Ajustar a largura total das janelas para não deixar margens
-  const totalWidth = leftWidth + rightWidth;
-  const widthDifference = screenWidth - totalWidth;
-
-  // Corrigir larguras para ajustar completamente
-  const adjustedLeftWidth = leftWidth + widthDifference;
+  // Diagnóstico
+  console.log('Screen Width:', screenWidth);
+  console.log('Left Window Width:', leftWidth);
+  console.log('Right Window Width:', rightWidth);
 
   // Abrir janela maior (à esquerda)
   window.open(
     'https://eliezerrosa.github.io/Aprenda-Fazendo-IA-Exercicios/',
     'leftWindow',
-    `width=${adjustedLeftWidth},height=${screenHeight},left=0,top=0`
+    `width=${leftWidth},height=${screenHeight},left=0,top=0`
   );
 
   // Abrir janela menor (à direita)
@@ -57,7 +55,7 @@ function openAndClose() {
     window.open(
       'https://chat.openai.com',
       'rightWindow',
-      `width=${rightWidth},height=${screenHeight},left=${adjustedLeftWidth},top=0`
+      `width=${rightWidth},height=${screenHeight},left=${leftWidth},top=0`
     );
   }, 500);
 
