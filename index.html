@@ -3,64 +3,749 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Gerenciador</title>
+  <title>Aprenda Fazendo - HTML, CSS e JavaScript</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      box-sizing: border-box;
     }
-    h1 {
-      font-size: 24px;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100vh;
       color: #333;
     }
-    p {
-      font-size: 16px;
-      color: #555;
+
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .header h1 {
+      color: #4a5568;
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      text-align: center;
+      color: #718096;
+      font-size: 1rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 0.5rem 1rem;
+      background: #4299e1;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-btn:hover {
+      background: #3182ce;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 120px);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .editor-section {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      padding: 1rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-section {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-container {
+      display: flex;
+      background: #f7fafc;
+      border-radius: 6px 6px 0 0;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      background: #e2e8f0;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: #4a5568;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      background: #4299e1;
+      color: white;
+    }
+
+    .editor {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+      background: #f8f9fa;
+      display: none;
+    }
+
+    .editor.active {
+      display: block;
+    }
+
+    .editor:focus {
+      border-color: #4299e1;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    }
+
+    #preview {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: white;
+    }
+
+    .examples {
+      margin-top: 1rem;
+    }
+
+    .example-btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem;
+      background: #48bb78;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .example-btn:hover {
+      background: #38a169;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+      
+      .editor {
+        height: 250px;
+      }
+      
+      .preview-section {
+        height: 300px;
+      }
     }
   </style>
 </head>
-<body onload="openAndClose()">
-  <h1>App Gerenciador</h1>
-  <p>As janelas do App de Exercícios e do ChatGPT estão sendo abertas...</p>
-  
- <script>
+<body>
+  <div class="header">
+    <h1>Aprenda Fazendo - HTML, CSS e JavaScript</h1>
+    <p>Aprenda de forma interativa e reativa. Escreva código e veja o resultado imediatamente!</p>
+    
+    <div class="nav-menu">
+      <button class="nav-btn" onclick="openExercises()">Exercícios Avançados</button>
+      <button class="nav-btn" onclick="openChatGPT()">ChatGPT</button>
+      <button class="nav-btn" onclick="openCourses()">Cursos Online</button>
+      <button class="nav-btn" onclick="loadExample('basic')">Exemplo Básico</button>
+    </div>
+  </div>
 
-function openAndClose() {
- // Pegue a largura e altura da tela disponível
-  const screenWidth = window.screen.availWidth; // Largura total disponível
-  const screenHeight = window.screen.availHeight; // Altura total disponível
-
-  // Proporções fixas para as janelas
- const leftWidth = Math.round(screenWidth * 0.65); // 65% da largura
-  const rightWidth = (screenWidth * 0.34); // 30% restante da largura
-
-  // Abrir janela maior (à esquerda)
-  window.open(
-    'https://eliezerrosa.github.io/Exercicios-Upgrade/',
-    'leftWindow',
-    `width=${leftWidth},height=${screenHeight},left=0,top=0`
-  );
-
-  // Abrir janela menor (à direita)
-  window.open(
-    'https://chat.openai.com',
-    'rightWindow',
-    `width=${rightWidth},height=${screenHeight},left=${leftWidth + 3},top=-1`
-  );
-// Fechar a página gerenciadora após 1 segundo (1000 ms)
-      setTimeout(() => {
-        window.close();
-      }, 1000);
-
+  <div class="container">
+    <div class="editor-section">
+      <div class="tab-container">
+        <button class="tab active" onclick="switchTab('html')">HTML</button>
+        <button class="tab" onclick="switchTab('css')">CSS</button>
+        <button class="tab" onclick="switchTab('js')">JavaScript</button>
+      </div>
+      
+      <textarea id="htmlEditor" class="editor active" placeholder="Digite seu código HTML aqui..."><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Projeto</title>
+</head>
+<body>
+  <h1>Olá, Mundo!</h1>
+  <p>Bem-vindo ao seu editor de código interativo!</p>
+  <button onclick="mudarCor()">Clique aqui</button>
+</body>
+</html></textarea>
+      
+      <textarea id="cssEditor" class="editor" placeholder="Digite seu código CSS aqui...">body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  padding: 20px;
+  text-align: center;
 }
 
-</script>
+h1 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
 
+button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #ff5252;
+}</textarea>
+      
+      <textarea id="jsEditor" class="editor" placeholder="Digite seu código JavaScript aqui...">function mudarCor() {
+  const cores = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+  const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+  document.body.style.background = corAleatoria;
+  
+  alert('Cor alterada! Continue experimentando!');
+}
+
+// Adicione suas próprias funções aqui
+console.log('JavaScript carregado!');</textarea>
+
+      <div class="examples">
+        <button class="example-btn" onclick="loadExample('form')">Exemplo: Formulário</button>
+        <button class="example-btn" onclick="loadExample('animation')">Exemplo: Animação CSS</button>
+        <button class="example-btn" onclick="loadExample('interactive')">Exemplo: JavaScript Interativo</button>
+      </div>
+    </div>
+
+    <div class="preview-section">
+      <iframe id="preview"></iframe>
+    </div>
+  </div>
+
+  <script>
+    let currentTab = 'html';
+
+    function switchTab(tab) {
+      // Remove active class from all editors and tabs
+      document.querySelectorAll('.editor').forEach(editor => {
+        editor.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tabBtn => {
+        tabBtn.classList.remove('active');
+      });
+      
+      // Show selected editor and activate tab
+      document.getElementById(tab + 'Editor').classList.add('active');
+      event.target.classList.add('active');
+      
+      currentTab = tab;
+    }
+
+    function updatePreview() {
+      const html = document.getElementById('htmlEditor').value;
+      const css = document.getElementById('cssEditor').value;
+      const js = document.getElementById('jsEditor').value;
+      
+      const preview = document.getElementById('preview');
+      const previewDoc = preview.contentDocument || preview.contentWindow.document;
+      
+      // Create complete HTML with CSS and JS
+      let fullHTML = html;
+      
+      // Insert CSS
+      if (css.trim()) {
+        fullHTML = fullHTML.replace('</head>', `<style>${css}</style></head>`);
+      }
+      
+      // Insert JS
+      if (js.trim()) {
+        fullHTML = fullHTML.replace('</body>', `<script>${js}<\/script></body>`);
+      }
+      
+      previewDoc.open();
+      previewDoc.write(fullHTML);
+      previewDoc.close();
+    }
+
+    function loadExample(type) {
+      const examples = {
+        basic: {
+          html: `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Projeto</title>
+</head>
+<body>
+  <h1>Olá, Mundo!</h1>
+  <p>Bem-vindo ao seu editor de código interativo!</p>
+  <button onclick="mudarCor()">Clique aqui</button>
+</body>
+</html>`,
+          css: `body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #ff5252;
+}`,
+          js: `function mudarCor() {
+  const cores = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+  const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+  document.body.style.background = corAleatoria;
+  
+  alert('Cor alterada! Continue experimentando!');
+}
+
+// Adicione suas próprias funções aqui
+console.log('JavaScript carregado!');`
+        },
+        
+        form: {
+          html: `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Exemplo</title>
+</head>
+<body>
+  <h1>Formulário de Contato</h1>
+  <form id="contato">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" required></textarea>
+    
+    <button type="submit">Enviar</button>
+  </form>
+  <div id="resultado"></div>
+</body>
+</html>`,
+          css: `body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#resultado {
+  margin-top: 20px;
+  padding: 10px;
+  background: #d4edda;
+  border-radius: 4px;
+  display: none;
+}`,
+          js: `document.getElementById('contato').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const mensagem = document.getElementById('mensagem').value;
+  
+  const resultado = document.getElementById('resultado');
+  resultado.innerHTML = '<h3>Formulário enviado com sucesso!</h3><p><strong>Nome:</strong> ' + nome + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Mensagem:</strong> ' + mensagem + '</p>';
+  resultado.style.display = 'block';
+  
+  // Limpar formulário
+  this.reset();
+});`
+        },
+        
+        animation: {
+          html: `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animações CSS</title>
+</head>
+<body>
+  <h1>Animações CSS</h1>
+  <div class="container">
+    <div class="box bounce">Bounce</div>
+    <div class="box slide">Slide</div>
+    <div class="box rotate">Rotate</div>
+    <div class="box pulse">Pulse</div>
+  </div>
+</body>
+</html>`,
+          css: `body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+.slide {
+  animation: slide 3s infinite;
+}
+
+.rotate {
+  animation: rotate 2s infinite linear;
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-50px); }
+  50% { transform: translateX(50px); }
+  100% { transform: translateX(-50px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}`,
+          js: `// Adicionar interatividade aos boxes
+document.querySelectorAll('.box').forEach(box => {
+  box.addEventListener('click', function() {
+    // Mudar cor aleatória
+    const cores = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'];
+    const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+    this.style.background = corAleatoria;
+    
+    // Efeito de escala temporário
+    this.style.transform = 'scale(1.2)';
+    setTimeout(() => {
+      this.style.transform = '';
+    }, 200);
+  });
+});
+
+console.log('Animações carregadas! Clique nos boxes para interagir!');`
+        },
+        
+        interactive: {
+          html: `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Interativo</title>
+</head>
+<body>
+  <h1>Jogo Simples: Adivinhe o Número</h1>
+  <div class="game-container">
+    <p>Pensei em um número entre 1 e 100. Tente adivinhar!</p>
+    <input type="number" id="guess" min="1" max="100" placeholder="Digite um número">
+    <button onclick="checkGuess()">Tentar</button>
+    <button onclick="newGame()">Novo Jogo</button>
+    
+    <div id="message"></div>
+    <div id="attempts"></div>
+    <div id="history"></div>
+  </div>
+</body>
+</html>`,
+          css: `body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 50px auto;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+input {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  margin: 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+button {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+#message {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#attempts {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+#history {
+  margin-top: 20px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+}`,
+          js: `let randomNumber;
+let attempts;
+let guessHistory;
+
+function newGame() {
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+  attempts = 0;
+  guessHistory = [];
+  
+  document.getElementById('message').textContent = 'Novo jogo iniciado! Boa sorte!';
+  document.getElementById('attempts').textContent = '';
+  document.getElementById('history').textContent = '';
+  document.getElementById('guess').value = '';
+  document.getElementById('guess').focus();
+}
+
+function checkGuess() {
+  const guess = parseInt(document.getElementById('guess').value);
+  const messageEl = document.getElementById('message');
+  const attemptsEl = document.getElementById('attempts');
+  const historyEl = document.getElementById('history');
+  
+  if (!guess || guess < 1 || guess > 100) {
+    messageEl.textContent = 'Por favor, digite um número entre 1 e 100!';
+    return;
+  }
+  
+  attempts++;
+  guessHistory.push(guess);
+  
+  if (guess === randomNumber) {
+    messageEl.innerHTML = '🎉 Parabéns! Você acertou em ' + attempts + ' tentativa(s)!';
+    messageEl.style.color = '#4ecdc4';
+  } else if (guess < randomNumber) {
+    messageEl.textContent = '📈 Muito baixo! Tente um número maior.';
+    messageEl.style.color = '#ffeaa7';
+  } else {
+    messageEl.textContent = '📉 Muito alto! Tente um número menor.';
+    messageEl.style.color = '#fd79a8';
+  }
+  
+  attemptsEl.textContent = 'Tentativas: ' + attempts;
+  historyEl.innerHTML = '<strong>Seus palpites:</strong> ' + guessHistory.join(', ');
+  
+  document.getElementById('guess').value = '';
+  document.getElementById('guess').focus();
+}
+
+// Permitir tecla Enter para jogar
+document.getElementById('guess').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    checkGuess();
+  }
+});
+
+// Iniciar novo jogo quando a página carrega
+newGame();`
+        }
+      };
+      
+      const example = examples[type];
+      if (example) {
+        document.getElementById('htmlEditor').value = example.html;
+        document.getElementById('cssEditor').value = example.css;
+        document.getElementById('jsEditor').value = example.js;
+        updatePreview();
+      }
+    }
+
+    function openExercises() {
+      window.open('https://eliezerrosa.github.io/Exercicios-Upgrade/', '_blank');
+    }
+
+    function openChatGPT() {
+      window.open('https://chat.openai.com', '_blank');
+    }
+
+    function openCourses() {
+      const courses = [
+        'https://www.freecodecamp.org/',
+        'https://www.codecademy.com/',
+        'https://developer.mozilla.org/pt-BR/',
+        'https://www.w3schools.com/'
+      ];
+      
+      courses.forEach(url => {
+        window.open(url, '_blank');
+      });
+    }
+
+    // Auto-update preview when typing
+    document.getElementById('htmlEditor').addEventListener('input', updatePreview);
+    document.getElementById('cssEditor').addEventListener('input', updatePreview);
+    document.getElementById('jsEditor').addEventListener('input', updatePreview);
+
+    // Initial preview load
+    updatePreview();
+  </script>
 </body>
 </html>
